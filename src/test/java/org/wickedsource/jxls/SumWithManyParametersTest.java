@@ -1,4 +1,4 @@
-package de.nrw.it;
+package org.wickedsource.jxls;
 
 import org.junit.Test;
 import org.jxls.common.Context;
@@ -22,7 +22,7 @@ public class SumWithManyParametersTest {
     @Test
     public void test() throws IOException {
         List<Employee> employees = generateSampleEmployeeData();
-        try(InputStream is = getClass().getResourceAsStream("/jxls-test.xlsx")) {
+        try (InputStream is = getClass().getResourceAsStream("/jxls-test.xlsx")) {
             Path tempFile = Files.createTempFile("jxls", ".xlsx");
             try (OutputStream os = new FileOutputStream(tempFile.toFile())) {
                 Context context = new Context();
@@ -36,8 +36,8 @@ public class SumWithManyParametersTest {
 
     private List<Employee> generateSampleEmployeeData() {
         List<Employee> employees = new ArrayList<Employee>();
-        for(int i = 0; i < 1000; i++){
-            employees.add(new Employee("Employee " + i, BigInteger.valueOf(random.nextLong())));
+        for (int i = 0; i < 1000; i++) {
+            employees.add(new Employee("Employee " + i, BigInteger.valueOf(random.nextInt(100)), BigInteger.valueOf(random.nextInt(100))));
         }
         return employees;
     }

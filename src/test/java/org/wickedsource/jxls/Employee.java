@@ -1,4 +1,4 @@
-package de.nrw.it;
+package org.wickedsource.jxls;
 
 import java.math.BigInteger;
 
@@ -8,9 +8,12 @@ public class Employee {
 
     private BigInteger salary;
 
-    public Employee(String name, BigInteger salary) {
+    private BigInteger bonus;
+
+    public Employee(String name, BigInteger salary, BigInteger bonus) {
         this.name = name;
         this.salary = salary;
+        this.bonus = bonus;
     }
 
     public String getName() {
@@ -27,5 +30,13 @@ public class Employee {
 
     public void setSalary(BigInteger salary) {
         this.salary = salary;
+    }
+
+    public BigInteger getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(BigInteger bonus) {
+        this.bonus = bonus;
     }
 }
