@@ -27,7 +27,9 @@ public class SumWithManyParametersTest {
             try (OutputStream os = new FileOutputStream(tempFile.toFile())) {
                 Context context = new Context();
                 context.putVar("employees", employees);
-                JxlsHelper.getInstance().processTemplate(is, os, context);
+                JxlsHelper jxls = JxlsHelper.getInstance();
+//                jxls.setUseFastFormulaProcessor(false);
+                jxls.processTemplate(is, os, context);
             }
             System.out.println(String.format("output file at %s", tempFile));
         }
