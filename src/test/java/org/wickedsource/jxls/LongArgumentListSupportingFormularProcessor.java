@@ -1,7 +1,8 @@
-package org.jxls.formula;
+package org.wickedsource.jxls;
 
 import org.jxls.common.CellData;
 import org.jxls.common.CellRef;
+import org.jxls.formula.FormulaProcessor;
 import org.jxls.transform.Transformer;
 import org.jxls.util.CellRefUtil;
 import org.jxls.util.Util;
@@ -10,7 +11,14 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FastFormulaProcessor implements FormulaProcessor {
+/**
+ * Custom implementation of JXLS's FormularProcessor interface which transforms SUM-functions like "SUM(A1,A2,A3)" into
+ * simple additions like "A1+A2+A3" and thus overriding Excel's limit of 255 arguments in functions.
+ * <p>
+ * This class is a copy of {@link org.jxls.formula.FastFormulaProcessor} with minor modifications.
+ * </p>
+ */
+public class LongArgumentListSupportingFormularProcessor implements FormulaProcessor {
     @Override
     public void processAreaFormulas(Transformer transformer) {
         Set<CellData> formulaCells = transformer.getFormulaCells();

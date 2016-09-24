@@ -2,7 +2,6 @@ package org.wickedsource.jxls;
 
 import org.junit.Test;
 import org.jxls.common.Context;
-import org.jxls.util.JxlsHelper;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,8 +26,7 @@ public class SumWithManyParametersTest {
             try (OutputStream os = new FileOutputStream(tempFile.toFile())) {
                 Context context = new Context();
                 context.putVar("employees", employees);
-                JxlsHelper jxls = JxlsHelper.getInstance();
-//                jxls.setUseFastFormulaProcessor(false);
+                CustomJxlsHelper jxls = CustomJxlsHelper.getInstance();
                 jxls.processTemplate(is, os, context);
             }
             System.out.println(String.format("output file at %s", tempFile));
