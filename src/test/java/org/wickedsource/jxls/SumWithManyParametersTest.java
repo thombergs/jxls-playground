@@ -20,12 +20,12 @@ public class SumWithManyParametersTest {
 
     @Test
     public void test() throws IOException {
-        List<Employee> employees = generateSampleEmployeeData();
+        List<Department> departments = generateSampleDepartmentData();
         try (InputStream is = getClass().getResourceAsStream("/jxls-test.xlsx")) {
             Path tempFile = Files.createTempFile("jxls", ".xlsx");
             try (OutputStream os = new FileOutputStream(tempFile.toFile())) {
                 Context context = new Context();
-                context.putVar("employees", employees);
+                context.putVar("departments", departments);
                 CustomJxlsHelper jxls = CustomJxlsHelper.getInstance();
                 jxls.processTemplate(is, os, context);
             }
@@ -34,9 +34,20 @@ public class SumWithManyParametersTest {
 
     }
 
+    private List<Department> generateSampleDepartmentData() {
+        List<Department> departments = new ArrayList<>();
+        for(int i = 0; i < 300; i++){
+            Department department = new Department();
+            department.setName(String.format("Department %d", i));
+            department.setEmployees(generateSampleEmployeeData());
+            departments.add(department);
+        }
+        return departments;
+    }
+
     private List<Employee> generateSampleEmployeeData() {
         List<Employee> employees = new ArrayList<Employee>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 5; i++) {
             employees.add(new Employee("Employee " + i, BigInteger.valueOf(random.nextInt(100)), BigInteger.valueOf(random.nextInt(100))));
         }
         return employees;

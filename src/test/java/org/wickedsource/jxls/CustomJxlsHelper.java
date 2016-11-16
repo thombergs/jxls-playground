@@ -24,7 +24,6 @@ public class CustomJxlsHelper {
     private boolean hideTemplateSheet = false;
     private boolean deleteTemplateSheet = true;
     private boolean processFormulas = true;
-    private boolean useFastFormulaProcessor = true;
     private String expressionNotationBegin;
     private String expressionNotationEnd;
     private SimpleExporter simpleExporter = new SimpleExporter();
@@ -74,15 +73,6 @@ public class CustomJxlsHelper {
         return this;
     }
 
-    public boolean isUseFastFormulaProcessor() {
-        return useFastFormulaProcessor;
-    }
-
-    public CustomJxlsHelper setUseFastFormulaProcessor(boolean useFastFormulaProcessor) {
-        this.useFastFormulaProcessor = useFastFormulaProcessor;
-        return this;
-    }
-
     public CustomJxlsHelper buildExpressionNotation(String expressionNotationBegin, String expressionNotationEnd) {
         this.expressionNotationBegin = expressionNotationBegin;
         this.expressionNotationEnd = expressionNotationEnd;
@@ -110,11 +100,7 @@ public class CustomJxlsHelper {
     }
 
     private Area setFormulaProcessor(Area xlsArea) {
-        if (useFastFormulaProcessor) {
-            xlsArea.setFormulaProcessor(new LongArgumentListSupportingFormularProcessor());
-        } else {
-            xlsArea.setFormulaProcessor(new StandardFormulaProcessor());
-        }
+        xlsArea.setFormulaProcessor(new LongArgumentListSupportingStandardFormularProcessor());
         return xlsArea;
     }
 
